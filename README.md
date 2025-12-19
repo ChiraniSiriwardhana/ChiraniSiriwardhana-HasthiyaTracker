@@ -152,21 +152,6 @@ This project uses Tailwind CSS v4, which has a different architecture:
 - Custom theme defined in `@theme` block in `index.css`
 - Supports arbitrary values and modern CSS features
 
-### Hot Module Replacement
-The development server supports HMR for instant updates. If styles don't update:
-1. Hard refresh: `Ctrl + Shift + R` (Windows/Linux) or `Cmd + Shift + R` (Mac)
-2. Clear browser cache
-3. Restart the dev server
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
 
 ## 👤 Author
 
