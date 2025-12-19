@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import ProjectCard from './components/ProjectCard';
+import ProjectTable from './components/ProjectTable';
 import ProjectModal from './components/ProjectModal';
 import type { Project, CreateProjectData } from './types/project.types';
 import {
@@ -19,6 +20,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('All');
+  const [viewMode, setViewMode] = useState<'card' | 'table'>('card');
 
   // Load projects on component mount
   useEffect(() => {
@@ -154,6 +156,36 @@ function App() {
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
             </select>
+
+            {/* View Toggle */}
+            <div className="flex border border-gray-300 rounded-md overflow-hidden shrink-0 min-h-10 sm:min-h-10">
+              <button
+                onClick={() => setViewMode('card')}
+                className={`px-3 sm:px-4 py-2 text-sm font-medium transition-colors ${
+                  viewMode === 'card' 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+                title="Card View"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setViewMode('table')}
+                className={`px-3 sm:px-4 py-2 text-sm font-medium transition-colors border-l border-gray-300 ${
+                  viewMode === 'table' 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+                title="Table View"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -215,17 +247,27 @@ function App() {
                   </div>
                 </div>
 
-                {/* Projects Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 ml-4 sm:ml-8 lg:ml-12" style={{ marginTop: '32px' }}>
-                  {filteredProjects.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
+                {/* Projects View - Card or Table */}
+                {viewMode === 'card' ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 ml-4 sm:ml-8 lg:ml-12" style={{ marginTop: '32px' }}>
+                    {filteredProjects.map((project) => (
+                      <ProjectCard
+                        key={project.id}
+                        project={project}
+                        onEdit={openEditModal}
+                        onDelete={handleDeleteProject}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ marginTop: '32px' }}>
+                    <ProjectTable
+                      projects={filteredProjects}
                       onEdit={openEditModal}
                       onDelete={handleDeleteProject}
                     />
-                  ))}
-                </div>
+                  </div>
+                )}
               </>
             )}
           </>
