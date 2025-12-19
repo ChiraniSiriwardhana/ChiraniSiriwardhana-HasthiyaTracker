@@ -100,16 +100,17 @@ function App() {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4 min-h-32 sm:min-h-22">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-xl sm:text-2xl">🐘</span>
+                <span className="text-xl sm:text-2xl" style={{ paddingLeft: '20px' }}>🐘</span>
                 <h1 className="text-lg sm:text-2xl font-bold text-gray-900">Hasthiya Project Tracker</h1>
               </div>
-              <p className="text-xs sm:text-sm text-gray-600">Manage and track your projects efficiently</p>
+              <p className="text-xs sm:text-sm text-gray-600" style={{ paddingLeft: '20px' }}>Manage and track your projects efficiently</p>
             </div>
             <button
               onClick={openCreateModal}
-              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-4 sm:px-5 py-3 sm:py-2.5 rounded-md font-medium flex items-center justify-center gap-2 transition-colors shadow-sm flex-shrink-0 text-sm sm:text-base w-full sm:w-auto"
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-md font-medium flex items-center justify-center gap-2 transition-colors shadow-sm shrink-0 w-full sm:w-auto"
+              style={{ marginRight: '32px', padding: '10px 20px', fontSize: '18px' }}
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg style={{ width: '10px', height: '10px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
               New Project
@@ -118,15 +119,17 @@ function App() {
         </div>
       </header>
 
+      <br></br>
+
       {/* Main Content */}
-      <main className="max-w-full mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-10">
+      <main className="max-w-8xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-8 sm:pb-10" style={{ paddingLeft: '40px', paddingRight: '40px' }}>
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 mb-4 sm:mb-6">
-          <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 min-h-32 sm:min-h-15">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3 min-h-20 sm:min-h-20" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
             {/* Search */}
             <div className="flex-1">
               <div className="relative">
-                <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" style={{ left: '12px' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
@@ -134,7 +137,8 @@ function App() {
                   placeholder="Search projects..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 sm:py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pr-4 h-10 sm:h-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  style={{ paddingLeft: '40px' }}
                 />
               </div>
             </div>
@@ -143,7 +147,7 @@ function App() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full sm:w-auto px-4 py-3 sm:py-2.5 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white flex-shrink-0"
+              className="w-full sm:w-auto px-4 h-10 sm:h-10 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shrink-0"
             >
               <option value="All">All Status</option>
               <option value="Pending">Pending</option>
@@ -191,28 +195,28 @@ function App() {
             ) : (
               <>
                 {/* Projects Count and Status Summary */}
-                <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                <div className="mb-4 sm:mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3" style={{ marginTop: '32px' }}>
                   <p className="text-xs sm:text-sm text-gray-700">
                     Showing <span className="font-semibold">{filteredProjects.length}</span> of <span className="font-semibold">{projects.length}</span> projects
                   </p>
                   <div className="flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1.5 sm:gap-y-2 text-xs sm:text-sm">
-                    <span className="text-yellow-700 whitespace-nowrap flex items-center">
-                      <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400 mr-1.5"></span>
-                      Pending: <span className="font-semibold ml-1">{statusCounts.pending}</span>
+                    <span className="whitespace-nowrap flex items-center justify-center bg-yellow-400 text-yellow-900 font-semibold border border-yellow-500" style={{ width: '80px', height: '55px', flexDirection: 'column', fontSize: '11px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{statusCounts.pending}</span>
+                      <span>Pending</span>
                     </span>
-                    <span className="text-blue-700 whitespace-nowrap flex items-center">
-                      <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-blue-400 mr-1.5"></span>
-                      In Progress: <span className="font-semibold ml-1">{statusCounts.inProgress}</span>
+                    <span className="whitespace-nowrap flex items-center justify-center bg-blue-400 text-blue-900 font-semibold border border-blue-500" style={{ width: '80px', height: '55px', flexDirection: 'column', fontSize: '11px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{statusCounts.inProgress}</span>
+                      <span style={{ fontSize: '9px' }}>In Progress</span>
                     </span>
-                    <span className="text-green-700 whitespace-nowrap flex items-center">
-                      <span className="inline-block w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-400 mr-1.5"></span>
-                      Completed: <span className="font-semibold ml-1">{statusCounts.completed}</span>
+                    <span className="whitespace-nowrap flex items-center justify-center bg-green-400 text-green-900 font-semibold border border-green-500" style={{ width: '80px', height: '55px', flexDirection: 'column', fontSize: '11px', borderRadius: '10px' }}>
+                      <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{statusCounts.completed}</span>
+                      <span>Completed</span>
                     </span>
                   </div>
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6 ml-4 sm:ml-8 lg:ml-12" style={{ marginTop: '32px' }}>
                   {filteredProjects.map((project) => (
                     <ProjectCard
                       key={project.id}
@@ -241,3 +245,5 @@ function App() {
 }
 
 export default App;
+
+
